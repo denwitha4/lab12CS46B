@@ -32,14 +32,15 @@ public class FamilyTree {
         // with the given name. Returns the node, or null if not found.
         TreeNode getNodeWithName(String targetName) {
             // Does this node have the target name?
-            if (targetName == this.name)
+            if (targetName != null && targetName.equals(this.name))
                 return this;
                     
             // No, recurse. Check all children of this node.
             for (TreeNode child: children)
             {
-                if (child.getNodeWithName(targetName) != null) {
-                    return child;
+                TreeNode match = child.getNodeWithName(targetName);
+                if (match != null) {
+                    return match;
                 }
                 // If child.getNodeWithName(targetName) returns a non-null node,
                 // then that's the node we're looking for. Return it.
@@ -94,8 +95,8 @@ public class FamilyTree {
 
         // Parse the input file. Create a FileReader that reads treeFile. Create a BufferedReader
         // that reads from the FileReader.
-        FileReader fr = ???
-        BufferedReader br = ???
+        FileReader fr = new FileReader(treeFile);
+        BufferedReader br = new BufferedReader(fr);
         String line;
         while ((line = br.readLine()) != null)
             addLine(line);
